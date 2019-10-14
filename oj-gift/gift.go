@@ -16,6 +16,7 @@ const (
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Buffer(make([]byte, 1024 * 1024), 1024 * 1024)
 	for scanner.Scan() {
 		numOfColorString := scanner.Text()
 		scanner.Scan()
@@ -26,19 +27,43 @@ func main() {
 		strconv.ParseInt(numOfColorString, ParseIntBase, ParseIntBitSize) //
 
 		colorsStrings := strings.Split(colorsString, " ")
-		colors := make([]int, 0)
+		colors := make([]int64, 0)
 		for _, v := range colorsStrings {
 			vv, _ := strconv.ParseInt(v, ParseIntBase, ParseIntBitSize)
-			colors = append(colors, int(vv))
+			colors = append(colors, vv)
 		}
-		m64, _ := strconv.ParseInt(mString, ParseIntBase, ParseIntBitSize)
-		m := int(m64)
-		count := solution(colors, m)
+		m, _ := strconv.ParseInt(mString, ParseIntBase, ParseIntBitSize)
+		count := solution1(colors, m)
 		fmt.Println(count)
 	}
 }
 
-func solution(colors []int, m int) int {
+func solution1(colors []int64, m int64) int64 {
+	fmt.Println(len(colors))
+	fmt.Println(m)
+	sum := int64(0)
+	for _, v := range colors {
+		sum += v
+	}
+	max := sum / m
+	for max > 0 {
+		validPearls := int64(0)
+		l := len(colors)
+		for i:= 0; i < l; i++ {
+			if colors[i] > max {
+				colors[i] = max
+			}
+			validPearls += colors[i]
+		}
+		if validPearls >= max * m {
+			break
+		}
+		max = validPearls / m
+	}
+	return max
+}
+
+func solution2(colors []int, m int) int {
 	// sort.Ints 按从小大大排列
 	sort.Ints(colors)
 	l := len(colors)
