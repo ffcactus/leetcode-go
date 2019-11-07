@@ -36,7 +36,6 @@ func TestSymmetricTree_2Node(t *testing.T) {
 	}
 }
 
-
 func TestSymmetricTree_NormalSymmetricTree(t *testing.T) {
 	a4 := TreeNode{
 		Val:   4,

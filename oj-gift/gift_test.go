@@ -22,7 +22,6 @@ func TestSolution1_2(t *testing.T) {
 	}
 }
 
-
 func TestMerge(t *testing.T) {
 	a := []int{5, 3, 1}
 	b := []int{6, 4, 2}

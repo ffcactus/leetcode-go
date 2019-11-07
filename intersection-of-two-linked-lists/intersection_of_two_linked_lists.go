@@ -9,7 +9,7 @@ package intersection_of_two_linked_lists
  */
 
 type ListNode struct {
-	Val int
+	Val  int
 	Next *ListNode
 }
 
@@ -21,9 +21,9 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	lenA := lenOfListNode(headA)
 	lenB := lenOfListNode(headB)
 	if lenA > lenB {
-		headA = move(lenA - lenB, headA)
+		headA = move(lenA-lenB, headA)
 	} else {
-		headB = move(lenB - lenA, headB)
+		headB = move(lenB-lenA, headB)
 	}
 
 	for true {

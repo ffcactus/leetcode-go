@@ -13,7 +13,7 @@ func exist(board [][]byte, word string) bool {
 		return false
 	}
 	wordBytes := []byte(word)
-	if maxY * maxX < len(wordBytes) {
+	if maxY*maxX < len(wordBytes) {
 		return false
 	}
 
@@ -55,9 +55,8 @@ func createMarker(maxX, maxY int) [][]bool {
 	return ret
 }
 
-
 // foundFrom 假定之前的寻找已经成功，并判断从[y][x]board开始，判断接下来的上下左右4个位置上是否有[wi]word这个字符。
-func foundFrom(x, y, maxX, maxY int, border [][]byte, wi int, word[]byte , marker [][]bool) bool {
+func foundFrom(x, y, maxX, maxY int, border [][]byte, wi int, word []byte, marker [][]bool) bool {
 	// 如果Word已经找完则返回。
 	if wi >= len(word) {
 		return true
@@ -78,16 +77,16 @@ func foundFrom(x, y, maxX, maxY int, border [][]byte, wi int, word[]byte , marke
 	marker[y][x] = true
 	wi++
 	// 如果接下来的内容能在上方找到则找到了。
-	if foundFrom(x, y - 1, maxX, maxY, border, wi, word, marker) {
+	if foundFrom(x, y-1, maxX, maxY, border, wi, word, marker) {
 		return true
 	}
-	if foundFrom(x, y + 1, maxX, maxY, border, wi, word, marker) {
+	if foundFrom(x, y+1, maxX, maxY, border, wi, word, marker) {
 		return true
 	}
-	if foundFrom(x - 1, y, maxX, maxY, border, wi, word, marker) {
+	if foundFrom(x-1, y, maxX, maxY, border, wi, word, marker) {
 		return true
 	}
-	if foundFrom(x + 1, y, maxX, maxY, border, wi, word, marker) {
+	if foundFrom(x+1, y, maxX, maxY, border, wi, word, marker) {
 		return true
 	}
 	// 如果上下左右都找不到，那么这次的起始位置也就没有意义了，该路径不行。

@@ -18,7 +18,7 @@ func TestMoveZeroes_1(t *testing.T) {
 }
 
 func TestMoveZeroes_2(t *testing.T) {
-	nums := []int{0,1,0,3,4}
+	nums := []int{0, 1, 0, 3, 4}
 	moveZeroes(nums)
 	fmt.Println(nums)
 }

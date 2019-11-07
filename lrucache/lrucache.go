@@ -4,6 +4,7 @@ import (
 	"container/list"
 	"fmt"
 )
+
 type cacheElement struct {
 	k int
 	v int
@@ -11,20 +12,18 @@ type cacheElement struct {
 
 type LRUCache struct {
 	capacity int
-	tree map[int]*list.Element
-	list *list.List
-
+	tree     map[int]*list.Element
+	list     *list.List
 }
 
 func Constructor(capacity int) LRUCache {
 	fmt.Printf("cache := Constructor(%d)\n", capacity)
 	return LRUCache{
 		capacity: capacity,
-		tree: make(map[int]*list.Element, capacity),
-		list: list.New(),
+		tree:     make(map[int]*list.Element, capacity),
+		list:     list.New(),
 	}
 }
-
 
 func (this *LRUCache) Get(key int) int {
 	fmt.Printf("cache.Get(%d)\n", key)
@@ -36,8 +35,7 @@ func (this *LRUCache) Get(key int) int {
 	return le.Value.(*cacheElement).v
 }
 
-
-func (this *LRUCache) Put(key int, value int)  {
+func (this *LRUCache) Put(key int, value int) {
 	fmt.Printf("cache.Put(%d, %d)\n", key, value)
 	oldElement, ok := this.tree[key]
 	if ok {
@@ -56,12 +54,11 @@ func (this *LRUCache) Put(key int, value int)  {
 	}
 
 	listElement := this.list.PushFront(&cacheElement{
-		v:     value,
-		k:   key,
+		v: value,
+		k: key,
 	})
 	this.tree[key] = listElement
 }
-
 
 /**
  * Your LRUCache object will be instantiated and called as such:

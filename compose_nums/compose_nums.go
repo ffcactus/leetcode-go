@@ -26,7 +26,7 @@ func main() {
 	scanner.Scan()
 	cases := scanner.Text()
 	casesNum, _ := strconv.ParseInt(cases, 10, 64)
-	for i:=0; i <int(casesNum); i++ {
+	for i := 0; i < int(casesNum); i++ {
 		scanner.Scan()
 		scanner.Text()
 		scanner.Scan()
@@ -51,7 +51,7 @@ func sortStrings(a []string) []string {
 
 	for i, _ := range a {
 		// 定制化的比较过程。
-		if a[i] + a[right] > a[right] + a[i] {
+		if a[i]+a[right] > a[right]+a[i] {
 			a[left], a[i] = a[i], a[left]
 			left++
 		}

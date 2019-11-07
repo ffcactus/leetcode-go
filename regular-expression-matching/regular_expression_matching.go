@@ -13,7 +13,7 @@ Converting 1D index into 2D co-ordinates:
 y = index / width;
 x = index % width;
 
- */
+*/
 func isMatch(s string, p string) bool {
 	var (
 		dp func(si, pi int) bool
@@ -21,11 +21,11 @@ func isMatch(s string, p string) bool {
 
 	x := len(s) + 1
 	y := len(p) + 1
-	memo := make([]int, x * y)
+	memo := make([]int, x*y)
 
 	dp = func(si, pi int) bool {
-		if memo[si * y + pi] != 0 {
-			return memo[si * y + pi] == 1
+		if memo[si*y+pi] != 0 {
+			return memo[si*y+pi] == 1
 		}
 		if pi == len(p) {
 			return si == len(s)
@@ -33,20 +33,20 @@ func isMatch(s string, p string) bool {
 
 		firstMatch := (si < len(s)) && (p[pi] == s[si] || p[pi] == '.')
 
-		if (pi <= len(p) - 2) && (p[pi + 1] == '*') {
-			ans := dp(si, pi + 2) || (firstMatch && dp(si + 1, pi))
+		if (pi <= len(p)-2) && (p[pi+1] == '*') {
+			ans := dp(si, pi+2) || (firstMatch && dp(si+1, pi))
 			if ans {
-				memo[si * y + pi] = 1
+				memo[si*y+pi] = 1
 			} else {
-				memo[si * y + pi] = 2
+				memo[si*y+pi] = 2
 			}
 			return ans
 		}
-		ans := firstMatch && dp(si + 1, pi + 1)
+		ans := firstMatch && dp(si+1, pi+1)
 		if ans {
-			memo[si * y + pi] = 1
+			memo[si*y+pi] = 1
 		} else {
-			memo[si * y + pi] = 2
+			memo[si*y+pi] = 2
 		}
 		return ans
 	}

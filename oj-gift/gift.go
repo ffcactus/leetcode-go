@@ -16,7 +16,7 @@ const (
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Buffer(make([]byte, 1024 * 1024), 1024 * 1024)
+	scanner.Buffer(make([]byte, 1024*1024), 1024*1024)
 	for scanner.Scan() {
 		numOfColorString := scanner.Text()
 		scanner.Scan()
@@ -49,13 +49,13 @@ func solution1(colors []int64, m int64) int64 {
 	for max > 0 {
 		validPearls := int64(0)
 		l := len(colors)
-		for i:= 0; i < l; i++ {
+		for i := 0; i < l; i++ {
 			if colors[i] > max {
 				colors[i] = max
 			}
 			validPearls += colors[i]
 		}
-		if validPearls >= max * m {
+		if validPearls >= max*m {
 			break
 		}
 		max = validPearls / m

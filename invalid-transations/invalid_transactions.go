@@ -9,12 +9,11 @@ import (
 
 // https://leetcode-cn.com/problems/invalid-transactions/
 
-
 type transaction struct {
-	name string
-	time int
-	value int
-	city string
+	name    string
+	time    int
+	value   int
+	city    string
 	invalid bool
 }
 
@@ -52,12 +51,12 @@ func invalidTransactions(transactions []string) []string {
 			if trans[i].name != trans[j].name {
 				break
 			}
-			if trans[j].time - trans[i].time <= 60 && trans[i].city != trans[j].city {
+			if trans[j].time-trans[i].time <= 60 && trans[i].city != trans[j].city {
 				trans[i].invalid = true
 				trans[j].invalid = true
 			}
 			// 如果时间已经超过了 60 分钟则没有必要比较下去
-			if trans[j].time - trans[i].time > 60 {
+			if trans[j].time-trans[i].time > 60 {
 				break
 			}
 		}
@@ -73,16 +72,15 @@ func invalidTransactions(transactions []string) []string {
 	return ret
 }
 
-
 func parseTransaction(s string) transaction {
 	ss := strings.Split(s, ",")
 	t, _ := strconv.ParseInt(ss[1], 10, 64)
 	v, _ := strconv.ParseInt(ss[2], 10, 64)
 	return transaction{
-		name:  ss[0],
-		time:  int(t),
-		value: int(v),
-		city:  ss[3],
+		name:    ss[0],
+		time:    int(t),
+		value:   int(v),
+		city:    ss[3],
 		invalid: v > 1000,
 	}
 }

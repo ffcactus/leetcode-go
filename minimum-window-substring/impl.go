@@ -66,7 +66,7 @@ func contains1(s, t string) bool {
 	for _, v := range t {
 		arrayT[v]++
 	}
-	for i:=0; i < 127; i++ {
+	for i := 0; i < 127; i++ {
 		if arrayS[i] < arrayT[i] {
 			return false
 		}

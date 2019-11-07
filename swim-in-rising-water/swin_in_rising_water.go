@@ -15,16 +15,16 @@ func swimInWater(grid [][]int) int {
 	x := 0
 	y := 0
 	updateSurface(&surface, nil, []record{{
-		v:grid[y][x],
-		x:x,
-		y:y,
+		v: grid[y][x],
+		x: x,
+		y: y,
 	}})
 	for true {
 		current := surface[0]
 		path = append(path, current)
 		x = current.x
 		y = current.y
-		if (x == n - 1) && (y == n - 1) {
+		if (x == n-1) && (y == n-1) {
 			break
 		}
 		newRecords := possibleNewRecord(current.x, current.y, n, path, grid)
@@ -60,7 +60,7 @@ func possibleNewRecord(x, y, n int, path []record, grid [][]int) []record {
 			ret = append(ret, up)
 		}
 	}
-	if y < n - 1 {
+	if y < n-1 {
 		down := record{
 			x: x,
 			y: y + 1,
@@ -81,7 +81,7 @@ func possibleNewRecord(x, y, n int, path []record, grid [][]int) []record {
 		left := record{
 			x: x - 1,
 			y: y,
-			v: grid[y][x - 1],
+			v: grid[y][x-1],
 		}
 		isOld := false
 		for _, v := range path {
@@ -94,11 +94,11 @@ func possibleNewRecord(x, y, n int, path []record, grid [][]int) []record {
 			ret = append(ret, left)
 		}
 	}
-	if x < n - 1 {
+	if x < n-1 {
 		right := record{
 			x: x + 1,
 			y: y,
-			v: grid[y][x + 1],
+			v: grid[y][x+1],
 		}
 		isOld := false
 		for _, v := range path {
