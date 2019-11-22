@@ -1,4 +1,6 @@
-package _sum
+// Copyright (c) Huawei Technologies Co., Ltd. 2019-2019. All rights reserved.
+
+package sum
 
 import (
 	"fmt"
