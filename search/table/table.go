@@ -1,5 +1,19 @@
 package table
 
+import (
+	"errors"
+)
+
+var (
+	// ErrEmptyTable defines the error that should raise when the table is empty.
+	// For example, when you call Floor() on en empty table.
+	ErrEmptyTable = errors.New("empty table")
+
+	// ErrInputOutOfRange defines the error that should raise when the input is out of defined range.
+	// For example, when you call Select(0) on a table.
+	ErrInputOutOfRange = errors.New("key out of range")
+)
+
 // Key represents key used in Table.
 type Key int
 
@@ -15,7 +29,7 @@ type Table interface {
 	Get(k Key) Value
 
 	// Delete key and it's value from the table.
-	Delete (k Key)
+	Delete(k Key)
 
 	// Contains check if there is a pair with the key in the table.
 	Contains(k Key) bool
@@ -33,18 +47,18 @@ type Table interface {
 	Max() Key
 
 	// Floor return the largest key that less or equal to the key.
-	Floor(k Key) Key
+	Floor(k Key) (Key, error)
 
 	// Ceiling return the smallest key that greater or equal to the key.
-	Ceiling(k Key) Key
+	Ceiling(k Key) (Key, error)
 
 	// Rank return the number of keys that is less than the key.
-	// i == rank(select(i)) for all i between 0 and size()-1
+	// i == Rank(Select(i)) for all i between 0 and size()-1
 	Rank(k Key) int
 
 	// Select return the key that is of rank k.
-	// All keys in the table satisfy key == select(rank(key))
-	Select(k int) Key
+	// All keys in the table satisfy key == Select(Rank(key)).
+	Select(k int) (Key, error)
 
 	// DeleteMin delete the smallest key.
 	DeleteMin()

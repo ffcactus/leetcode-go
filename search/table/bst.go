@@ -2,10 +2,10 @@ package table
 
 // node represents the node in the BST tree.
 type node struct {
-	key Key
+	key   Key
 	value Value
-	n int // the number of node that includes subtree of left and right and this root.
-	left *node
+	n     int // the number of node that includes subtree of left and right and this root.
+	left  *node
 	right *node
 }
 
@@ -27,22 +27,22 @@ func (impl *bst) Put(k Key, v Value) {
 }
 
 func (impl *bst) put(n *node, k Key, v Value) *node {
-		if n == nil {
-			return &node{
-				key: k,
-				value: v,
-				n: 1,
-			}
+	if n == nil {
+		return &node{
+			key:   k,
+			value: v,
+			n:     1,
 		}
-		if k < n.key {
-			n.left = impl.put(n.left, k, v)
-		} else if k > n.key {
-			n.right = impl.put(n.right, k, v)
-		} else {
-			n.value = v
-		}
-		n.n = impl.size(n.left) + impl.size(n.right) + 1
-		return n
+	}
+	if k < n.key {
+		n.left = impl.put(n.left, k, v)
+	} else if k > n.key {
+		n.right = impl.put(n.right, k, v)
+	} else {
+		n.value = v
+	}
+	n.n = impl.size(n.left) + impl.size(n.right) + 1
+	return n
 }
 
 // Get the value paired with key, nil if the key is absent.
@@ -66,13 +66,55 @@ func (impl *bst) get(n *node, k Key) Value {
 }
 
 // Delete key and it's value from the table.
-func (impl *bst) Delete (k Key) {
+func (impl *bst) Delete(k Key) {
 
+}
+
+func (impl *bst) internalDelete(n *node, k Key) *node {
+	if n == nil {
+		return nil
+	}
+	if k < n.key {
+		impl.internalDelete(n.left, k)
+	} else if k > n.key {
+		impl.internalDelete(n.right, k)
+	} else {
+		if n.right == nil {
+			return n.left
+		}
+		if n.left == nil {
+			return n.right
+		}
+		t := n
+		n = impl.min(t.right)
+		n.right = impl.deleteMin(t.right)
+		n.left = t.left
+	}
+	n.n = impl.size(n.left) + impl.size(n.right) + 1
+	return n
 }
 
 // Contains check if there is a pair with the key in the table.
 func (impl *bst) Contains(k Key) bool {
+	if impl.contains(impl.root, k) == nil {
+		return false
+	}
+	return true
+}
 
+func (impl *bst) contains(n *node, k Key) *node {
+	if n == nil {
+		return nil
+	}
+	if k < n.key {
+		return impl.contains(n.left, k)
+	} else if k > n.key {
+		return impl.contains(n.right, k)
+	} else if n.key == k {
+		return n
+	} else {
+		return nil
+	}
 }
 
 // IsEmpty check if the table is empty.
@@ -117,8 +159,11 @@ func (impl *bst) max(n *node) *node {
 }
 
 // Floor return the largest key that less or equal to the key.
-func (impl *bst) Floor(k Key) Key {
-	return impl.floor(impl.root, k).key
+func (impl *bst) Floor(k Key) (Key, error) {
+	if impl.root == nil {
+		return 0, ErrEmptyTable
+	}
+	return impl.floor(impl.root, k).key, nil
 }
 
 func (impl *bst) floor(n *node, k Key) *node {
@@ -132,14 +177,35 @@ func (impl *bst) floor(n *node, k Key) *node {
 		return impl.floor(n.left, k)
 	}
 	t := impl.floor(n.right, k)
-	if t == nil {
+	if t != nil {
 		return t
 	}
 	return n
 }
-// Ceiling return the smallest key that greater or equal to the key.
-func (impl *bst) Ceiling(k Key) Key {
 
+// Ceiling return the smallest key that greater or equal to the key.
+func (impl *bst) Ceiling(k Key) (Key, error) {
+	if impl.root == nil {
+		return 0, ErrEmptyTable
+	}
+	return impl.ceiling(impl.root, k).key, nil
+}
+
+func (impl *bst) ceiling(n *node, k Key) *node {
+	if n == nil {
+		return nil
+	}
+	if k == n.key {
+		return n
+	}
+	if k > n.key {
+		return impl.ceiling(n.left, k)
+	}
+	t := impl.floor(n.left, k)
+	if t != nil {
+		return t
+	}
+	return n
 }
 
 // Rank return the number of keys that is less than the key.
@@ -163,8 +229,14 @@ func (impl *bst) rank(n *node, k Key) int {
 
 // Select return the key that is of rank k.
 // All keys in the table satisfy key == select(rank(key))
-func (impl *bst) Select(k int) Key {
-	return impl.internalSelect(impl.root, k).key
+func (impl *bst) Select(k int) (Key, error) {
+	if impl.root == nil {
+		return 0, ErrEmptyTable
+	}
+	if k == 0 {
+		return 0, ErrInputOutOfRange
+	}
+	return impl.internalSelect(impl.root, k).key, nil
 }
 
 func (impl *bst) internalSelect(n *node, k int) *node {
@@ -174,15 +246,24 @@ func (impl *bst) internalSelect(n *node, k int) *node {
 	t := impl.size(n.left)
 	if t > k {
 		return impl.internalSelect(n.left, k)
-	} else if k < k {
-		return impl.internalSelect(n.right, k - t - 1)
+	} else if t < k {
+		return impl.internalSelect(n.right, k-t-1)
 	}
 	return n
 }
 
 // DeleteMin delete the smallest key.
 func (impl *bst) DeleteMin() {
-	impl.Delete(impl.Min())
+	impl.root = impl.deleteMin(impl.root)
+}
+
+func (impl *bst) deleteMin(n *node) *node {
+	if n.left == nil {
+		return n.right
+	}
+	n.left = impl.deleteMin(n.left)
+	n.n = impl.size(n.left) + impl.size(n.right) + 1
+	return n
 }
 
 // DeleteMax delete the largest key.
@@ -200,5 +281,3 @@ func (impl *bst) SizeBetween(low, high Key) int {
 		return impl.Rank(high) - impl.Rank(low)
 	}
 }
-
-
