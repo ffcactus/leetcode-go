@@ -3,6 +3,7 @@ package graph
 
 // Graph defines the interface for graph.
 type Graph interface {
+
 	// Vertices return the number of vertices.
 	Vertices() int
 
