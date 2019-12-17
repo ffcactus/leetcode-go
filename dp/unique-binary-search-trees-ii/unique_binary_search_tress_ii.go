@@ -17,8 +17,8 @@ import "fmt"
 
 // TreeNode is a definition of a binary tree node.
 type TreeNode struct {
-	Val int
-	Left *TreeNode
+	Val   int
+	Left  *TreeNode
 	Right *TreeNode
 }
 
@@ -34,7 +34,7 @@ func dp(from, to int) []*TreeNode {
 	if to < from {
 		return nil
 	}
-	if to - from == 0 {
+	if to-from == 0 {
 		ret := []*TreeNode{&TreeNode{
 			Val:   to,
 			Left:  nil,
@@ -43,9 +43,9 @@ func dp(from, to int) []*TreeNode {
 		return ret
 	}
 	ret := make([]*TreeNode, 0)
-	for i:=from; i <= to; i++ {
-		left := dp(from, i - 1)
-		right := dp(i + 1, to)
+	for i := from; i <= to; i++ {
+		left := dp(from, i-1)
+		right := dp(i+1, to)
 		if left != nil && right != nil {
 			for _, eachLeft := range left {
 				for _, eachRight := range right {

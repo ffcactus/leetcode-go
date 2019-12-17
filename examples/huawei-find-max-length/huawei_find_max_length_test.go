@@ -6,7 +6,7 @@ import (
 )
 
 func TestFindMaxLength_Case1(t *testing.T) {
-	input := []string{"un","iq","ue"}
+	input := []string{"un", "iq", "ue"}
 	actual := findMaxLength(input)
 	fmt.Println(actual)
 }

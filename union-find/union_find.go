@@ -7,6 +7,7 @@ package union_find
 
 // element 表示union find问题中的数据对中的元素。
 type element int
+
 // domain 表示union find问题中的域
 type domain int
 

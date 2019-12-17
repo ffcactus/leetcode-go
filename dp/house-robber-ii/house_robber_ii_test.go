@@ -28,7 +28,7 @@ func TestRob_Case3(t *testing.T) {
 }
 
 func TestRob_Case4(t *testing.T) {
-	input := []int{1,1,3,6,7,10,7,1,8,5,9,1,4,4,3}
+	input := []int{1, 1, 3, 6, 7, 10, 7, 1, 8, 5, 9, 1, 4, 4, 3}
 	expected := 4
 	actual := rob(input)
 	assert.Equal(t, expected, actual)

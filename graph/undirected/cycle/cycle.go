@@ -6,12 +6,12 @@ import "leetcode-go/graph"
 
 // DFSImpl use DFS to check if there is a cycle in the graph.
 type DFSImpl struct {
-	marked []bool
+	marked   []bool
 	hasCycle bool
 }
 
 // NewDFSImpl generate the DFSImpl from a graph.
-func NewDFSImpl(g graph.Graph) *DFSImpl {
+func NewDFSImpl(g graph.UndirectedGraph) *DFSImpl {
 	impl := DFSImpl{
 		marked:   make([]bool, g.Vertices()),
 		hasCycle: false,
@@ -24,7 +24,7 @@ func NewDFSImpl(g graph.Graph) *DFSImpl {
 	return &impl
 }
 
-func (impl *DFSImpl) dfs(g graph.Graph, next, previous int) {
+func (impl *DFSImpl) dfs(g graph.UndirectedGraph, next, previous int) {
 	if impl.hasCycle {
 		return
 	}
@@ -43,5 +43,3 @@ func (impl *DFSImpl) dfs(g graph.Graph, next, previous int) {
 func (impl *DFSImpl) HasCycle() bool {
 	return impl.hasCycle
 }
-
-

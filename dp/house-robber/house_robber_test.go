@@ -7,14 +7,14 @@ import (
 )
 
 func TestRob_Case1(t *testing.T) {
-	input := []int{1,2,3,1}
+	input := []int{1, 2, 3, 1}
 	expected := 4
 	actual := rob(input)
 	assert.Equal(t, expected, actual)
 }
 
 func TestRob_Case2(t *testing.T) {
-	input := []int{2,7,9,3,1}
+	input := []int{2, 7, 9, 3, 1}
 	expected := 12
 	actual := rob(input)
 	assert.Equal(t, expected, actual)

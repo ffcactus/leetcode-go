@@ -6,7 +6,7 @@ import (
 )
 
 func TestQuestion3_Case1(t *testing.T) {
-	input := []int{1,6,4,10,2,5}
+	input := []int{1, 6, 4, 10, 2, 5}
 	output := leftNum(input)
 	fmt.Println(output)
 }
@@ -27,7 +27,7 @@ func TestQuestion3_Case3(t *testing.T) {
 }
 
 func TestQuestion3_Case4(t *testing.T) {
-	input := []int{1,2,3,4,5,5, 4, 3, 2, 1}
+	input := []int{1, 2, 3, 4, 5, 5, 4, 3, 2, 1}
 	output := leftNum(input)
 	fmt.Println(output)
 }

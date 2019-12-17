@@ -3,7 +3,7 @@ package search
 import "leetcode-go/graph"
 
 // NewDepthFirstSearch return a deep first search.
-func NewDepthFirstSearch(g graph.Graph, s int) Search {
+func NewDepthFirstSearch(g graph.UndirectedGraph, s int) Search {
 	impl := depthFirstSearch{}
 	impl.marked = make([]bool, g.Vertices())
 	impl.dfs(g, s) // mark all the vertices that is connected to the source and get the count.
@@ -13,10 +13,10 @@ func NewDepthFirstSearch(g graph.Graph, s int) Search {
 // depthFirstSearch provide the depth first search of Search interface.
 type depthFirstSearch struct {
 	marked []bool
-	count int
+	count  int
 }
 
-func (impl *depthFirstSearch) dfs(g graph.Graph, v int) {
+func (impl *depthFirstSearch) dfs(g graph.UndirectedGraph, v int) {
 	impl.marked[v] = true
 	impl.count++
 	for _, w := range g.Adjacent(v) {

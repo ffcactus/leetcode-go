@@ -12,7 +12,6 @@ func findMaxLength(arr []string) int {
 
 }
 
-
 /*
 func findMaxLength(arr []string) int {
 	if len(arr) == 0 {

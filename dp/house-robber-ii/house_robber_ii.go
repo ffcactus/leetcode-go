@@ -11,7 +11,7 @@ import "fmt"
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/house-robber-ii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
+*/
 
 /*
 为了使得问题简化，我们把圆环拉成直线，只是现在直线长度扩大一倍，即两个原数组相加，这样就不会越界。
@@ -20,7 +20,7 @@ import "fmt"
 当我们考察从原数组中取一个数并考察有这个数时的最大值时（比如说取1），那么这个问题就变为在新数组中考察 该数字 + 随后若干位连续数字的最大值（比如说3,4）
 把原数组中每个数字都考察一遍，找到最大值就是该问题的解。
 
- */
+*/
 
 type key struct {
 	from int
@@ -35,7 +35,7 @@ func rob(nums []int) int {
 		return nums[0]
 	}
 	if preLen == 2 {
-		if nums[0] >nums[1] {
+		if nums[0] > nums[1] {
 			return nums[0]
 		} else {
 			return nums[1]
@@ -49,11 +49,11 @@ func rob(nums []int) int {
 		}
 		memo[k] = nums[i]
 	}
-	max := 0;
-	for i:=0; i < preLen; i++ {
-		right := dp(nums, i + 2, (i +2) + (preLen - 4), memo)
+	max := 0
+	for i := 0; i < preLen; i++ {
+		right := dp(nums, i+2, (i+2)+(preLen-4), memo)
 		m := nums[i] + right
-		if m >max {
+		if m > max {
 			max = m
 		}
 	}
@@ -61,7 +61,7 @@ func rob(nums []int) int {
 }
 
 func dp(nums []int, from, to int, memo map[key]int) int {
-	fmt.Printf("checking from %d, %d = %v\n", from, to, nums[from:to + 1])
+	fmt.Printf("checking from %d, %d = %v\n", from, to, nums[from:to+1])
 	k := key{
 		from: from,
 		to:   to,

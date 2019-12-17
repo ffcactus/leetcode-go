@@ -9,5 +9,3 @@ type Path interface {
 	// PathTo return the path from source to v, and nil if no such a path.
 	PathTo(v int) []int
 }
-
-

@@ -8,5 +8,3 @@ type Search interface {
 	// Count return the number of vertices that is connected to source.
 	Count() int
 }
-
-

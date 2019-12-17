@@ -12,7 +12,7 @@ package unique_paths_three
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/unique-paths-iii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- */
+*/
 
 // 显然，目标点的路径数等于上下左右4个点的路径数之和。
 // 题目要求每个点必须通过一次，且只能通过一次，因此既需要记录路径。
@@ -25,18 +25,18 @@ func search(x0, y0, x1, y1, maxX, maxY int, grid [][]int) int {
 	sum := 0
 	// 上
 	if y1 > 0 {
-		if grid[y1 -1][x1] == 0 {
+		if grid[y1-1][x1] == 0 {
 			newGrid := grid
 			newGrid[y1][x1] = -1
-			sum += search(x0, y0, x1, y1 - 1, maxX, maxY, newGrid)
+			sum += search(x0, y0, x1, y1-1, maxX, maxY, newGrid)
 		}
 	}
 	// 下
 	if y1 < maxY {
-		if grid[y1 + 1][x1] == 0 {
+		if grid[y1+1][x1] == 0 {
 			newGrid := grid
 			newGrid[y1][x1] = -1
-			sum += search(x0, y0, x1, y1 + 1, maxX, maxY, newGrid)
+			sum += search(x0, y0, x1, y1+1, maxX, maxY, newGrid)
 		}
 	}
 	// 左

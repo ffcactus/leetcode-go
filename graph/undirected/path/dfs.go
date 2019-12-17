@@ -3,17 +3,22 @@ package path
 import "leetcode-go/graph"
 
 // NewDFSPath return DFS implementation of interface Path.
-func NewDFSPath(g graph.Graph, s int) Path {
-	return nil
+func NewDFSPath(g graph.UndirectedGraph, s int) Path {
+	impl := dfsImpl{}
+	impl.marked = make([]bool, g.Vertices())
+	impl.edgeTo = make([]int, g.Vertices())
+	impl.s = s
+	impl.dfs(g, s)
+	return &impl
 }
 
 type dfsImpl struct {
 	marked []bool // Has dfs been called for this vertex?
-	edgeTo []int // last vertex on known path to this vertex.
-	s int // source.
+	edgeTo []int  // last vertex on known path to this vertex.
+	s      int    // source.
 }
 
-func (impl *dfsImpl) dfs(g graph.Graph, v int) {
+func (impl *dfsImpl) dfs(g graph.UndirectedGraph, v int) {
 	impl.marked[v] = true
 	for _, w := range g.Adjacent(v) {
 		if !impl.marked[w] {
@@ -37,7 +42,7 @@ func (impl *dfsImpl) PathTo(v int) []int {
 		return nil
 	}
 	ret := make([]int, 0)
-	for x:= v; x!=impl.s; x = impl.edgeTo[x] {
+	for x := v; x != impl.s; x = impl.edgeTo[x] {
 		ret = append([]int{x}, ret...)
 	}
 	ret = append([]int{impl.s}, ret...)
