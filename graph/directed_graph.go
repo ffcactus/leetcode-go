@@ -31,7 +31,7 @@ func NewDirectedGraph(v int) DirectedGraph {
 // The first line is the number of vertices.
 // The second line is the number of edges.
 // The rest of lines are pair of vertex that is connected directly, separated by space.
-func NewDirectedGraphFromReader(r io.Reader) (UndirectedGraph, error) {
+func NewDirectedGraphFromReader(r io.Reader) (DirectedGraph, error) {
 	impl := directedGraphImpl{}
 	scanner := bufio.NewScanner(r)
 	if scanner.Scan() {

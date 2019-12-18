@@ -1,12 +1,25 @@
+// Package search includes the implementation of search interface for directed graph.
 package search
 
 import "leetcode-go/graph"
 
 // NewDepthFirstSearch return a deep first search.
-func NewDepthFirstSearch(g graph.UndirectedGraph, s int) Search {
+func NewDepthFirstSearch(g graph.UndirectedGraph, s int) graph.Search {
 	impl := depthFirstSearch{}
 	impl.marked = make([]bool, g.Vertices())
 	impl.dfs(g, s) // mark all the vertices that is connected to the source and get the count.
+	return &impl
+}
+
+// NewDFSSearchForMultipleSources returns a implementation that accept multiple sources for Search API.
+func NewDFSSearchForMultipleSources(g graph.UndirectedGraph, sources []int) graph.Search {
+	impl := depthFirstSearch{}
+	impl.marked = make([]bool, g.Vertices())
+	for _, s := range sources {
+		if !impl.marked[s] {
+			impl.dfs(g, s)
+		}
+	}
 	return &impl
 }
 

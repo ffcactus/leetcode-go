@@ -1,9 +1,8 @@
 // Package graph includes various implementations related to algorithms in graph problems.
 package graph
 
-// UndirectedGraph defines the interface for undirected graph.
-type UndirectedGraph interface {
-
+// Graph provide the common interface for both directed and undirected graph.
+type Graph interface {
 	// Vertices return the number of vertices.
 	Vertices() int
 
@@ -17,18 +16,15 @@ type UndirectedGraph interface {
 	Adjacent(v int) []int
 }
 
+// UndirectedGraph defines the interface for undirected graph.
+type UndirectedGraph interface {
+	Graph
+}
+
 // DirectedGraph defines the interface for directed graph.
 type DirectedGraph interface {
+	Graph
 
-	// Vertices return the number of vertices.
-	Vertices() int
-
-	// Edges return the number of edges.
-	Edges() int
-
-	// AddEdge add an edge v0->v1
-	AddEdge(v0, v1 int)
-
-	// Adjacent return the vertices that is adjacent to vertex v.
-	Adjacent(v int) []int
+	// Reverse reverse this graph.
+	Reverse() DirectedGraph
 }

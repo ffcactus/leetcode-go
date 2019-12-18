@@ -1,4 +1,4 @@
-package search
+package graph
 
 // Search defines the interface for a search operation in a graph concerned to a source.
 type Search interface {
