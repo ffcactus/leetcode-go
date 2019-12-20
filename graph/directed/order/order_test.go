@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-var stream = `13
+var tinyDG = `13
 15
 0 1
 0 5
@@ -28,7 +28,7 @@ var stream = `13
 `
 
 func TestNewDFSOrder(t *testing.T) {
-	g, err := graph.NewDirectedGraphFromReader(strings.NewReader(stream))
+	g, err := graph.NewDirectedGraphFromReader(strings.NewReader(tinyDG))
 	assert.NoError(t, err)
 	impl := NewDFSOrder(g)
 	fmt.Println(impl.Pre())
