@@ -6,6 +6,7 @@ import (
 )
 
 // SCCChecker provide the interface to check strong connected components.
+// A strong connected component is the one that every vertex can be reached from every other vertex.
 type SCCChecker interface {
 
 	// IsStrongConnected check if v and w are strongly connected.
