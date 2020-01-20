@@ -21,8 +21,8 @@ type SCCChecker interface {
 
 type kosaraju struct {
 	marked []bool
-	id []int
-	count int
+	id     []int
+	count  int
 }
 
 // NewKosarajuSSCChecker return a SCCChecker based on Kosaraju's algorithm.

@@ -10,7 +10,7 @@ import (
 // NewEdgeWeightedGraph generate an edge weighted graph that have a specific number of vertices.
 func NewEdgeWeightedGraph(numOfVertices int) EdgeWeightedGraph {
 	impl := adjacentListImplOfEWG{
-		v: numOfVertices,
+		v:   numOfVertices,
 		adj: make([][]Edge, numOfVertices),
 	}
 	return &impl
@@ -60,9 +60,9 @@ func NewEdgeWeightedGraphFromReader(r io.Reader) (EdgeWeightedGraph, error) {
 				return nil, err
 			}
 			impl.AddEdge(Edge{
-				v:v0,
-				w:v1,
-				weight:w64,
+				v:      v0,
+				w:      v1,
+				weight: w64,
 			})
 		}
 	}
@@ -71,8 +71,8 @@ func NewEdgeWeightedGraphFromReader(r io.Reader) (EdgeWeightedGraph, error) {
 
 // adjacentListImplOfEWG implements the EdgeWeightedGraph based on adjacent lists.
 type adjacentListImplOfEWG struct {
-	v int
-	e int
+	v   int
+	e   int
 	adj [][]Edge
 }
 

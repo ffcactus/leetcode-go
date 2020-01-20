@@ -17,9 +17,9 @@ type MST interface {
 
 // lazyPrimMST implements the MST interface with Prim algorithm.
 type lazyPrimMST struct {
-	marked []bool
+	marked   []bool
 	mstQueue []graph.Edge
-	pq edgePQ
+	pq       edgePQ
 }
 
 // NewLazyPrimMST constructs the MST implementation.
@@ -95,4 +95,3 @@ func (pq *edgePQ) Pop() interface{} {
 	*pq = old[0 : n-1]
 	return item
 }
-

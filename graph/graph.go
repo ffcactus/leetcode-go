@@ -37,8 +37,8 @@ type DirectedGraph interface {
 // Edge defines the edge used in edge weighted graph.
 type Edge struct {
 	weight float64
-	v int
-	w int
+	v      int
+	w      int
 }
 
 func (e Edge) Weight() float64 {
@@ -76,5 +76,5 @@ type EdgeWeightedGraph interface {
 }
 
 func (e Edge) String() string {
-	return fmt.Sprintf("%d-%d %.2f", e.v, e.w, e.weight);
+	return fmt.Sprintf("%d-%d %.2f", e.v, e.w, e.weight)
 }

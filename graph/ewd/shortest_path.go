@@ -19,21 +19,21 @@ type ShortestPath interface {
 }
 
 type dijkstraSP struct {
-	distTo []float64 // distTo[v] is the length of the shortest known path from s to v.
+	distTo []float64       // distTo[v] is the length of the shortest known path from s to v.
 	edgeTo []*DirectedEdge // edgeTo[v] is the edge that connects v to its parent in the tree (the last edge from s to v)
-	pq priorityQueue
+	pq     priorityQueue
 }
 
 // relax relax edge e is should not be in the shortest path.
 func (impl *dijkstraSP) relax(e *DirectedEdge) {
-	if impl.distTo[e.To] > impl.distTo[e.From] + e.Weight {
+	if impl.distTo[e.To] > impl.distTo[e.From]+e.Weight {
 		impl.distTo[e.To] = impl.distTo[e.From] + e.Weight
 		impl.edgeTo[e.To] = e
 		if i := impl.pq.Contains(e.To); i != nil {
 			impl.pq.Update(i, i.Value, impl.distTo[e.To])
 		} else {
 			heap.Push(&impl.pq, item{
-				Value: e.To,
+				Value:    e.To,
 				Priority: impl.distTo[e.To],
 			})
 		}
@@ -78,7 +78,7 @@ func NewDijkstraShortestPath(g Interface, s int) ShortestPath {
 	impl.distTo[s] = 0
 	heap.Init(&impl.pq)
 	heap.Push(&impl.pq, item{
-		Value: s,
+		Value:    s,
 		Priority: 0.0,
 		Index:    0,
 	})
@@ -93,8 +93,8 @@ func NewDijkstraShortestPath(g Interface, s int) ShortestPath {
 
 // An item is something we manage in a Priority queue.
 type item struct {
-	Value int
-	Priority float64    // The Priority of the item in the queue.
+	Value    int
+	Priority float64 // The Priority of the item in the queue.
 	// The Index is needed by update and is maintained by the heap.Interface methods.
 	Index int // The Index of the item in the heap.
 }
@@ -137,7 +137,7 @@ func (pq *priorityQueue) Update(item *item, value int, priority float64) {
 }
 
 func (pq *priorityQueue) Contains(value int) *item {
-	for i := 0; i <len(*pq); i++ {
+	for i := 0; i < len(*pq); i++ {
 		if (*pq)[i].Value == value {
 			return &(*pq)[i]
 		}

@@ -10,11 +10,11 @@ import (
 func TestPriorityQueue(t *testing.T) {
 	items := map[string]int{
 		"banana": 3,
-		"apple": 2,
-		"pear": 4,
+		"apple":  2,
+		"pear":   4,
 	}
 	pq := make(PriorityQueue, len(items))
-	i:=0
+	i := 0
 	for value, priority := range items {
 		pq[i] = &Item{
 			Value:    value,

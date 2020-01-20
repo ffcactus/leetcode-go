@@ -5,8 +5,8 @@ import "leetcode-go/graph"
 // dfsImpl implements the CC interface based on DFS algorithm.
 type dfsImpl struct {
 	marked []bool
-	id []int
-	count int
+	id     []int
+	count  int
 }
 
 // NewDFSImpl returns a CC implementation based on DFS algorithm.
@@ -14,7 +14,7 @@ func NewDFSImpl(g graph.UndirectedGraph) CC {
 	impl := dfsImpl{}
 	impl.marked = make([]bool, g.Vertices())
 	impl.id = make([]int, g.Vertices())
-	for s:=0; s < g.Vertices(); s++ {
+	for s := 0; s < g.Vertices(); s++ {
 		// After a recursive call to dfs(), all the vertices that belongs to s will be marked,
 		// So when we find another vertex that is not marked we find another component.
 		if !impl.marked[s] {

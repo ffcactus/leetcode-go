@@ -8,4 +8,3 @@ type Topological interface {
 	// Order return the vertices in topological order.
 	Order() []int
 }
-

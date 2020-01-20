@@ -27,6 +27,7 @@ var (
 6 4 0.93
 `
 )
+
 func TestNewEdgeWeightedDirectedGraphFromStream(t *testing.T) {
 	g, err := NewEdgeWeightedDirectedGraphFromStream(strings.NewReader(tinyEWD))
 	assert.NoError(t, err)

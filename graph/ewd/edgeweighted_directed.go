@@ -10,8 +10,8 @@ import (
 
 // DirectedEdge defines the edge in edge-weighted directed graph.
 type DirectedEdge struct {
-	From int
-	To int
+	From   int
+	To     int
 	Weight float64
 }
 
@@ -24,10 +24,9 @@ type Interface interface {
 	AllEdges() []DirectedEdge
 }
 
-
 type implementation struct {
-	v int
-	e int
+	v   int
+	e   int
 	adj [][]DirectedEdge
 }
 
@@ -117,4 +116,3 @@ func NewEdgeWeightedDirectedGraphFromStream(r io.Reader) (Interface, error) {
 	}
 	return &impl, nil
 }
-

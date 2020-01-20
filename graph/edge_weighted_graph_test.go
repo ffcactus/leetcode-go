@@ -31,5 +31,5 @@ func TestNewEdgeWeightedGraphFromReader(t *testing.T) {
 	g, err := NewEdgeWeightedGraphFromReader(strings.NewReader(tinyEWG))
 	assert.NoError(t, err)
 	impl, _ := g.(*adjacentListImplOfEWG)
-	assert.ElementsMatch(t, []Edge{{v:6, w: 0, weight: 0.58}, {v:0, w: 2, weight: 0.26}, {v:0, w: 4, weight: 0.38}, {v:0, w: 7, weight: 0.16}}, impl.adj[0])
+	assert.ElementsMatch(t, []Edge{{v: 6, w: 0, weight: 0.58}, {v: 0, w: 2, weight: 0.26}, {v: 0, w: 4, weight: 0.38}, {v: 0, w: 7, weight: 0.16}}, impl.adj[0])
 }
