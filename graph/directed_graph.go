@@ -26,6 +26,19 @@ func NewDirectedGraph(v int) DirectedGraph {
 	return &impl
 }
 
+// NewDirectedGraphFromArray construct the directed graph from array.
+func NewDirectedGraphFromArray(v int, edges [][]int) DirectedGraph {
+	impl := directedGraphImpl{
+		v:   v,
+		e:   len(edges),
+		adj: make([][]int, v),
+	}
+	for _, edge := range edges {
+		impl.AddEdge(edge[0], edge[1])
+	}
+	return &impl
+}
+
 // NewDirectedGraphFromReader return a directed graph that is represented by adjacency lists,
 // The graph will be generated from reader r.
 // The first line is the number of vertices.
